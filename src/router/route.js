@@ -9,6 +9,8 @@ import './../utils/H-ui.admin.page'
 
 import OrderIndex from './../containers/OrderIndex'
 import Todo from './../containers/Todo'
+import Platform from './../containers/PlatformIndex'
+import TravelIndex from './../containers/TravelIndex'
 
  import './../../css/fonts/iconfont.css'
  import './../../css/font.css'
@@ -42,7 +44,16 @@ const todo = (location, cb) => {
         cb(null, require('./../containers/Todo').default)
     }, 'todo')
 }
-
+const platform=(location,cb)=>{
+    require.ensure([],require=>{
+        cb(null,require('./../containers/PlatformIndex').default)
+},'platform')
+}
+const travelIndex=(location,cb)=>{
+    require.ensure([],require=>{
+        cb(null,require('./../containers/TravelIndex').default)
+    },'travelIndex')
+}
 
 const history = process.env.NODE_ENV !== 'production' ? browserHistory : hashHistory;
 
@@ -51,6 +62,8 @@ const RouteConfig = (
         <Route path="/" component={Roots}>
             <IndexRoute component={OrderIndex} />
             <Route path="Todo" getComponent={todo} />
+             <Route path="Platform" getComponent={platform} />
+              <Route path="TravelIndex" getComponent={travelIndex} />
             <Redirect from='*' to='/' />
         </Route>
     </Router>
